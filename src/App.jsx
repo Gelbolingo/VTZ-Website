@@ -26,10 +26,10 @@ import markerArt from '../Asset/MAERKER.png';
 import previewMap from '../Asset/preview/701470018_27538427522430001_1085027290509739756_n.jpg';
 import previewReportRed from '../Asset/preview/Screenshot 2026-05-18 224410.png';
 import previewReportBlue from '../Asset/preview/Screenshot 2026-05-18 224458.png';
-import qrCodeImage from '../Asset/Qrcode/Qrcode.png';
+import qrCodeImage from '../Asset/Qrcode/VtzQrCode.png';
 
 const navItems = ['Features', 'How it works', 'Preview', 'Download'];
-const apkUrl = new URL('https://github.com/Gelbolingo/VTZ-/releases/download/v1.0/VTZ.v1.apk', import.meta.url).href;
+const apkUrl = new URL('https://github.com/Gelbolingo/VTZ-Website/releases/download/1.1/VTZ.apk', import.meta.url).href;
 
 const features = [
   {
@@ -129,7 +129,7 @@ function Navbar({ menuOpen, setMenuOpen }) {
         </div>
         <a
           href={apkUrl}
-          download="https://github.com/Gelbolingo/VTZ-/releases/download/v1.0/VTZ.v1.apk"
+          download="https://github.com/Gelbolingo/VTZ-Website/releases/download/1.1/VTZ.apk"
           className="hidden items-center gap-2 rounded-full bg-ink px-5 py-3 text-sm font-bold text-white shadow-premium transition hover:-translate-y-0.5 hover:bg-[#0f2b32] lg:inline-flex"
         >
           Download App <ArrowRight size={16} />
@@ -194,7 +194,7 @@ function Hero() {
           <div className="mt-9 flex max-w-[330px] flex-col gap-4 sm:max-w-none sm:flex-row">
             <a
               href={apkUrl}
-              download="https://github.com/Gelbolingo/VTZ-/releases/download/v1.0/VTZ.v1.apk"
+              download="https://github.com/Gelbolingo/VTZ-Website/releases/download/1.1/VTZ.apk"
               className="group inline-flex w-full items-center justify-center gap-3 rounded-full bg-ink px-7 py-4 text-base font-extrabold text-white shadow-premium transition hover:-translate-y-1 hover:bg-[#113039] sm:w-auto"
             >
               Download App
@@ -399,7 +399,7 @@ function Download() {
               </p>
               <a
                 href={apkUrl}
-                download="https://github.com/Gelbolingo/VTZ-/releases/download/v1.0/VTZ.v1.apk"
+                download="https://github.com/Gelbolingo/VTZ-Website/releases/download/1.1/VTZ.apk"
                 className="mt-8 inline-flex items-center justify-center gap-3 rounded-full bg-white px-7 py-4 text-base font-extrabold text-ink shadow-sm transition hover:-translate-y-1 hover:bg-aqua"
               >
                 Download App <ArrowRight size={19} />
