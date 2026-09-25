@@ -7,7 +7,6 @@ import {
   Compass,
   Download as DownloadIcon,
   FileWarning,
-  Github,
   Info,
   Landmark,
   Map,
@@ -30,8 +29,7 @@ import previewNotifications from '../Asset/preview/notification.png';
 import previewValenzuela from '../Asset/preview/Valenzuela.jpg';
 import qrCodeImage from '../Asset/Qrcode/VTZQRCode2.png';
 
-const APK_URL = 'https://github.com/Gelbolingo/VTZ-Website/releases/download/1.3/VTZv.1.3.apk';
-const GITHUB_RELEASE_URL = 'https://github.com/Gelbolingo/VTZ-Website/releases/tag/1.3';
+const APK_URL = 'https://github.com/Gelbolingo/VTZ-Website/releases/download/1.4/VTZv.1.4.apk';
 
 const navLinks = [
   { label: 'Home', href: '#home' },
@@ -322,17 +320,13 @@ function CoreFeatures() {
       <div className="mx-auto mt-14 grid max-w-7xl gap-5 sm:grid-cols-2 xl:grid-cols-3">
         {coreFeatures.map((feature, index) => (
           <Reveal key={feature.title} delay={(index % 3) * 0.07} y={26}>
-            <motion.article
-              whileHover={{ y: -8 }}
-              transition={{ duration: 0.25, ease: 'easeOut' }}
-              className="group h-full rounded-[2rem] border border-white/65 bg-white/75 p-7 shadow-sm backdrop-blur-xl transition hover:border-aqua/50 hover:shadow-premium"
-            >
-              <div className="mb-7 grid h-14 w-14 place-items-center rounded-2xl bg-ink text-white transition group-hover:bg-gradient-to-br group-hover:from-aqua group-hover:to-signal group-hover:text-ink">
+            <article className="h-full rounded-[2rem] border border-white/65 bg-white/75 p-7 shadow-sm backdrop-blur-xl">
+              <div className="mb-7 grid h-14 w-14 place-items-center rounded-2xl bg-ink text-white">
                 <feature.icon size={25} aria-hidden="true" />
               </div>
               <h3 className="text-xl font-black">{feature.title}</h3>
               <p className="mt-3 leading-7 text-ink/60">{feature.copy}</p>
-            </motion.article>
+            </article>
           </Reveal>
         ))}
       </div>
@@ -352,17 +346,13 @@ function WhyVTZ() {
       <div className="mx-auto mt-14 grid max-w-7xl gap-5 md:grid-cols-3">
         {whyCards.map((card, index) => (
           <Reveal key={card.title} delay={index * 0.08} y={28}>
-            <motion.article
-              whileHover={{ y: -8 }}
-              transition={{ duration: 0.25, ease: 'easeOut' }}
-              className="group h-full rounded-[2rem] border border-white/65 bg-white/75 p-7 shadow-sm backdrop-blur-xl transition hover:border-aqua/50 hover:shadow-premium"
-            >
-              <div className="mb-7 grid h-14 w-14 place-items-center rounded-2xl bg-ink text-white transition group-hover:bg-gradient-to-br group-hover:from-aqua group-hover:to-signal group-hover:text-ink">
+            <article className="h-full rounded-[2rem] border border-white/65 bg-white/75 p-7 shadow-sm backdrop-blur-xl">
+              <div className="mb-7 grid h-14 w-14 place-items-center rounded-2xl bg-ink text-white">
                 <card.icon size={25} aria-hidden="true" />
               </div>
               <h3 className="text-xl font-black">{card.title}</h3>
               <p className="mt-3 leading-7 text-ink/60">{card.copy}</p>
-            </motion.article>
+            </article>
           </Reveal>
         ))}
       </div>
@@ -386,9 +376,8 @@ function HowItWorks() {
         {journeySteps.map((step, index) => (
           <Reveal key={step.title} delay={index * 0.08} y={30}>
             <div className="relative h-full rounded-[2rem] border border-white/10 bg-white/[0.07] p-7 backdrop-blur-xl">
-              <div className="mb-8 flex items-center justify-between">
+              <div className="mb-8">
                 <span className="grid h-12 w-12 place-items-center rounded-2xl bg-aqua font-black text-ink">{step.index}</span>
-                <ChevronRight size={18} className="text-white/25" aria-hidden="true" />
               </div>
               <h3 className="text-2xl font-black">{step.title}</h3>
               <p className="mt-3 leading-7 text-white/62">{step.copy}</p>
@@ -503,16 +492,8 @@ function Download() {
                 Get the VTZ Android application and discover a more convenient way to access tricycle terminal
                 information in Valenzuela City.
               </p>
-              <div className="mt-8 flex flex-col gap-4 sm:flex-row sm:items-center">
+              <div className="mt-8">
                 <DownloadButton variant="light" label="Download Now" />
-                <a
-                  href={GITHUB_RELEASE_URL}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center justify-center gap-2 rounded-2xl border border-white/20 px-6 py-4 text-base font-extrabold text-white transition hover:border-aqua/60 hover:text-aqua focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-aqua"
-                >
-                  <Github size={18} aria-hidden="true" /> View GitHub Release
-                </a>
               </div>
             </div>
           </Reveal>
@@ -608,11 +589,6 @@ function Footer() {
             <li>
               <a href={APK_URL} target="_blank" rel="noopener noreferrer" className="transition hover:text-ink">
                 Download Android app
-              </a>
-            </li>
-            <li>
-              <a href={GITHUB_RELEASE_URL} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 transition hover:text-ink">
-                <Github size={16} aria-hidden="true" /> GitHub release
               </a>
             </li>
           </ul>

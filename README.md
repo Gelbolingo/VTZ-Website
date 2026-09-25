@@ -41,7 +41,7 @@ VTZ is available as an Android application package (APK).
 
 Download the VTZ Android application:
 
-https://github.com/Gelbolingo/VTZ-Website/releases/download/1.1/VTZv.1.2.apk
+https://github.com/Gelbolingo/VTZ-Website/releases/download/1.4/VTZv.1.4.apk
 
 ## Website
 
@@ -49,11 +49,11 @@ Live landing page:
 
 https://vtz.vercel.app/
 
-## GitHub Release
+## Release
 
 Release details:
 
-https://github.com/Gelbolingo/VTZ-Website/releases/tag/1.1
+https://github.com/Gelbolingo/VTZ-Website/releases/tag/1.4
 
 ## Preview / Screenshots
 
