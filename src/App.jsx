@@ -30,8 +30,8 @@ import previewNotifications from '../Asset/preview/notification.png';
 import previewValenzuela from '../Asset/preview/Valenzuela.jpg';
 import qrCodeImage from '../Asset/Qrcode/VTZQRCode2.png';
 
-const APK_URL = 'https://github.com/Gelbolingo/VTZ-Website/releases/download/1.1/VTZv.1.2.apk';
-const GITHUB_RELEASE_URL = 'https://github.com/Gelbolingo/VTZ-Website/releases/tag/1.1';
+const APK_URL = 'https://github.com/Gelbolingo/VTZ-Website/releases/download/1.3/VTZv.1.3.apk';
+const GITHUB_RELEASE_URL = 'https://github.com/Gelbolingo/VTZ-Website/releases/tag/1.3';
 
 const navLinks = [
   { label: 'Home', href: '#home' },
