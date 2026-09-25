@@ -31,7 +31,7 @@ import previewMap from '../Asset/preview/map.png';
 import previewNotifications from '../Asset/preview/notification.png';
 import previewValenzuela from '../Asset/preview/Valenzuela.jpg';
 import qrCodeImage from '../Asset/Qrcode/VTZv.1.4QrCode.png';
-import { LANGUAGE_META, LANGUAGE_VALUES, MODAL_COPY, STRINGS, normalizeLanguage, persistLanguage, readSavedLanguage } from './i18n.js';
+import { LANGUAGE_META, LANGUAGE_VALUES, STRINGS, normalizeLanguage, persistLanguage, readSavedLanguage } from './i18n.js';
 
 const APK_URL = 'https://github.com/Gelbolingo/VTZ-Website/releases/download/1.4/VTZv.1.4.apk';
 
@@ -41,44 +41,21 @@ const JOURNEY_INDEXES = ['01', '02', '03', '04'];
 const HERO_PHONE_IMAGES = [previewMap, previewNotifications, previewHelpdesk];
 
 function App() {
-  // Synchronous init from localStorage: returning visitors render directly
-  // in their saved language with no flash and no repeated prompt.
+  // Landing page opens immediately. English is the default when there is
+  // no saved preference; the navbar selector handles all later changes.
   const [language, setLanguage] = useState(() => readSavedLanguage() || 'english');
-  const [languageReady, setLanguageReady] = useState(() => readSavedLanguage() !== null);
-  const [languageOpen, setLanguageOpen] = useState(() => readSavedLanguage() === null);
   const t = STRINGS[normalizeLanguage(language)] || STRINGS.english;
 
   useEffect(() => {
     persistLanguage(language);
   }, [language]);
 
-  // Lock background scroll while the entry prompt is visible.
-  useEffect(() => {
-    if (!languageOpen) return;
-    const prev = document.body.style.overflow;
-    document.body.style.overflow = 'hidden';
-    return () => { document.body.style.overflow = prev; };
-  }, [languageOpen]);
-
   const chooseLanguage = (value) => {
     const next = normalizeLanguage(value);
     if (!next) return;
     setLanguage(next);
     persistLanguage(next);
-    setLanguageReady(true);
-    setLanguageOpen(false);
   };
-
-  if (!languageReady) {
-    return (
-      <LanguageGate
-        mode="first-visit"
-        active={language}
-        onChoose={chooseLanguage}
-        onClose={null}
-      />
-    );
-  }
 
   return (
     <div className="min-h-screen overflow-hidden bg-[#f6fbfa] text-ink">
@@ -781,82 +758,6 @@ function FloatingTransportCard({ t }) {
         </div>
       </div>
     </motion.div>
-  );
-}
-
-function LanguageGate({ mode = 'first-visit', active, onChoose, onClose }) {
-  const isFirstVisit = mode === 'first-visit';
-  useEffect(() => {
-    if (!isFirstVisit) return;
-    const prev = document.body.style.overflow;
-    document.body.style.overflow = 'hidden';
-    return () => { document.body.style.overflow = prev; };
-  }, [isFirstVisit]);
-  useEffect(() => {
-    if (isFirstVisit) return;
-    const onKey = (event) => { if (event.key === 'Escape') onClose?.(); };
-    window.addEventListener('keydown', onKey);
-    return () => window.removeEventListener('keydown', onKey);
-  }, [isFirstVisit, onClose]);
-  const shell = isFirstVisit
-    ? 'flex min-h-screen items-center justify-center bg-[#f6fbfa] p-5'
-    : 'fixed inset-0 z-[80] flex items-center justify-center bg-ink/60 p-5 backdrop-blur-sm';
-  return (
-    <div className={shell} role="dialog" aria-modal="true" aria-labelledby="language-title" aria-describedby="language-desc">
-      <motion.div
-        initial={{ opacity: 0, y: 24, scale: 0.98 }}
-        animate={{ opacity: 1, y: 0, scale: 1 }}
-        transition={{ duration: 0.35, ease: 'easeOut' }}
-        className="relative w-full max-w-lg overflow-hidden rounded-[2rem] border border-white/60 bg-white p-7 text-center shadow-premium sm:p-10"
-      >
-        <div aria-hidden="true" className="absolute -right-16 -top-16 h-48 w-48 rounded-full bg-aqua/25 blur-3xl" />
-        <div aria-hidden="true" className="absolute -bottom-16 -left-16 h-48 w-48 rounded-full bg-signal/20 blur-3xl" />
-        <div className="relative">
-          {!isFirstVisit && (
-            <button
-              type="button"
-              onClick={onClose}
-              aria-label={MODAL_COPY.close}
-              className="absolute right-0 top-0 grid h-11 w-11 place-items-center rounded-2xl border border-ink/10 bg-white text-ink shadow-sm transition hover:bg-ink/5"
-            >
-              <X size={20} />
-            </button>
-          )}
-          <span className="mx-auto grid h-16 w-16 place-items-center overflow-hidden rounded-3xl bg-white shadow-sm ring-1 ring-ink/10">
-            <img src={markerArt} alt="VTZ logo" className="h-14 w-14 object-contain" />
-          </span>
-          <h2 id="language-title" className="mt-5 text-3xl font-black text-ink sm:text-4xl">{MODAL_COPY.title}</h2>
-          <p id="language-desc" className="mx-auto mt-3 max-w-sm text-base leading-7 text-ink/60">{MODAL_COPY.description}</p>
-          <div className="mt-7 grid gap-3" role="group" aria-label={MODAL_COPY.title}>
-            {LANGUAGE_VALUES.map((value) => {
-              const meta = LANGUAGE_META[value];
-              const selected = normalizeLanguage(active) === value;
-              return (
-                <button
-                  key={value}
-                  type="button"
-                  autoFocus={isFirstVisit && selected}
-                  onClick={() => onChoose(value)}
-                  aria-pressed={selected}
-                  className={`flex min-h-[64px] w-full items-center gap-4 rounded-2xl border-2 px-5 py-4 text-left text-base font-extrabold transition focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink ${
-                    selected
-                      ? 'border-ink bg-ink text-white shadow-premium'
-                      : 'border-ink/10 bg-[#f6fbfa] text-ink hover:-translate-y-0.5 hover:border-ink/30 hover:bg-white hover:shadow-premium active:translate-y-0'
-                  }`}
-                >
-                  <span aria-hidden="true" className="text-2xl leading-none">{meta.flag}</span>
-                  <span className="flex-1">
-                    <span className="block text-lg">{meta.label}</span>
-                    <span className={`block text-sm font-bold ${selected ? 'text-white/70' : 'text-ink/55'}`}>{meta.hint}</span>
-                  </span>
-                  {selected && <span aria-hidden="true" className="grid h-8 w-8 place-items-center rounded-full bg-aqua text-ink">✓</span>}
-                </button>
-              );
-            })}
-          </div>
-        </div>
-      </motion.div>
-    </div>
   );
 }
 
