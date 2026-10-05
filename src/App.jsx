@@ -12,7 +12,6 @@ import {
   Info,
   Landmark,
   Languages,
-  Map,
   MapPin,
   Menu,
   PackageSearch,
@@ -30,10 +29,10 @@ import previewHelpdesk from '../Asset/preview/Helpdesk.png';
 import previewMap from '../Asset/preview/map.png';
 import previewNotifications from '../Asset/preview/notification.png';
 import previewValenzuela from '../Asset/preview/Valenzuela.jpg';
-import qrCodeImage from '../Asset/Qrcode/VTZv.1.4QrCode.png';
+import qrCodeImage from '../Asset/Qrcode/VTZv.1.5QrCode.png';
 import { LANGUAGE_META, LANGUAGE_VALUES, STRINGS, normalizeLanguage, persistLanguage, readSavedLanguage } from './i18n.js';
 
-const APK_URL = 'https://github.com/Gelbolingo/VTZ-Website/releases/download/1.4/VTZv.1.4.apk';
+const APK_URL = 'https://github.com/Gelbolingo/VTZ-Website/releases/download/1.5/VTZv.1.5.apk';
 
 const CORE_FEATURE_ICONS = [Search, MapPin, Landmark, PackageSearch, FileWarning, ReceiptText];
 const WHY_CARD_ICONS = [Compass, Info, ClipboardList];
@@ -62,7 +61,9 @@ function App() {
       <Navbar t={t} language={language} onChooseLanguage={chooseLanguage} />
       <main>
         <Hero t={t} />
+        <AppPreview t={t} />
         <CoreFeatures t={t} />
+        <HowItWorks t={t} />
         <CommuterServices t={t} />
         <AboutVTZ t={t} />
         <Download t={t} />
@@ -298,18 +299,19 @@ function LanguageMenuRow({ t, language, onChoose }) {
 
 function Hero({ t }) {
   const hero = t.hero;
+  const heroPhone = t.phones[0];
   return (
     <section id="home" aria-labelledby="hero-heading" className="relative overflow-hidden px-5 pb-20 pt-32 lg:px-8 lg:pt-36">
       <BackgroundLines />
       <div aria-hidden="true" className="absolute left-1/2 top-24 h-80 w-80 -translate-x-1/2 rounded-full bg-aqua/25 blur-3xl" />
       <div aria-hidden="true" className="absolute right-0 top-56 h-96 w-96 rounded-full bg-signal/20 blur-3xl" />
 
-      <div className="relative mx-auto w-full max-w-7xl">
+      <div className="relative mx-auto grid w-full max-w-7xl items-center gap-12 lg:grid-cols-[1.05fr_.95fr] lg:gap-8">
         <motion.div
           initial={{ opacity: 0, y: 24 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, ease: 'easeOut' }}
-          className="mx-auto w-full min-w-0 max-w-3xl text-center"
+          className="w-full min-w-0 max-w-2xl text-center lg:text-left"
         >
           <p className="mb-6 inline-flex items-center gap-2 rounded-full border border-ink/10 bg-white/70 px-4 py-2 text-sm font-bold text-ink/70 shadow-sm backdrop-blur">
             <Sparkles size={16} className="text-signal" aria-hidden="true" />
@@ -318,10 +320,10 @@ function Hero({ t }) {
           <h1 id="hero-heading" className="text-4xl font-black leading-[1.05] tracking-normal text-ink sm:text-5xl md:text-7xl">
             {hero.titleA} <span className="text-signal">{hero.titleB}</span> {hero.titleC}
           </h1>
-          <p className="mx-auto mt-6 max-w-xl text-base leading-7 text-ink/64 md:mt-7 md:max-w-2xl md:text-xl md:leading-8">
+          <p className="mx-auto mt-6 max-w-xl text-base leading-7 text-ink/64 md:mt-7 md:text-xl md:leading-8 lg:mx-0">
             {hero.copy}
           </p>
-          <div className="mx-auto mt-9 flex max-w-md flex-col gap-4 sm:flex-row sm:items-center sm:justify-center">
+          <div className="mx-auto mt-9 flex max-w-md flex-col gap-4 sm:flex-row sm:items-center sm:justify-center lg:mx-0 lg:justify-start">
             <DownloadButton variant="hero" label={hero.downloadNow} className="w-full justify-center sm:w-auto" />
             <a
               href="#features"
@@ -333,52 +335,112 @@ function Hero({ t }) {
           </div>
         </motion.div>
 
-        <HeroPhoneGallery t={t} />
+        <Hero3DPhone phone={heroPhone} image={previewMap} />
       </div>
     </section>
   );
 }
 
-function HeroPhoneGallery({ t }) {
+function Hero3DPhone({ phone, image }) {
+  const reduceMotion = useReducedMotion();
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 32 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.8, delay: 0.15, ease: 'easeOut' }}
+      className="relative mx-auto w-full max-w-[320px] sm:max-w-[360px] lg:max-w-[400px]"
+    >
+      <div aria-hidden="true" className="absolute left-1/2 top-1/2 -z-10 h-[110%] w-[110%] -translate-x-1/2 -translate-y-1/2 rounded-full bg-aqua/20 blur-3xl" />
+      <motion.div
+        animate={reduceMotion ? undefined : { y: [0, -8, 0] }}
+        transition={{ duration: 6, repeat: Infinity, ease: 'easeInOut' }}
+        className="relative mx-auto w-full [transform-style:preserve-3d]"
+      >
+        <div className="group vtz-hero-tilt relative mx-auto w-full">
+          <div className="rounded-[3rem] bg-ink p-[12px] shadow-premium ring-1 ring-white/20 transition-shadow duration-500 ease-out group-hover:shadow-glow">
+            <div className="relative overflow-hidden rounded-[2.4rem] bg-[#0b1620]">
+              <div aria-hidden="true" className="absolute left-1/2 top-3 z-20 h-6 w-28 -translate-x-1/2 rounded-full bg-ink" />
+              <img
+                src={image}
+                alt={phone.alt}
+                loading="eager"
+                className="h-[480px] w-full select-none object-cover object-top sm:h-[540px] lg:h-[580px]"
+                draggable={false}
+              />
+              <span aria-hidden="true" className="absolute inset-x-0 top-0 h-24 bg-gradient-to-b from-ink/55 to-transparent" />
+              <span aria-hidden="true" className="pointer-events-none absolute inset-0 rounded-[2.4rem] bg-gradient-to-br from-white/12 via-transparent to-transparent opacity-60 transition-opacity duration-500 group-hover:opacity-90" />
+            </div>
+          </div>
+        </div>
+      </motion.div>
+    </motion.div>
+  );
+}
+
+function AppPreview({ t }) {
   const phones = t.phones.map((phone, index) => ({ ...phone, image: HERO_PHONE_IMAGES[index] }));
   return (
-    <div className="relative mx-auto mt-16 w-full max-w-5xl">
-      <motion.div
-        initial={{ opacity: 0, y: 32 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.8, delay: 0.15, ease: 'easeOut' }}
-        className="relative"
-      >
-        <FloatingTransportCard t={t} />
-        <div
-          role="img"
-          aria-label="Preview of three VTZ mobile application screens: terminal map, report updates, and Help Desk"
-          className="grid grid-cols-1 items-end justify-items-center gap-8 sm:grid-cols-3 sm:gap-5 lg:gap-7"
-        >
-          {phones.map((phone, index) => (
-            <motion.div
-              key={phone.label}
-              initial={{ opacity: 0, y: 36, rotate: 0 }}
-              whileInView={{ opacity: 1, y: 0, rotate: index === 0 ? -4 : index === 2 ? 4 : 0 }}
-              viewport={{ once: true, amount: 0.35 }}
-              transition={{ duration: 0.7, delay: index * 0.1, ease: 'easeOut' }}
-              className={index === 1 ? 'sm:-mt-8' : ''}
-            >
-              <DeviceFrame
-                t={t}
-                image={phone.image}
-                alt={phone.alt}
-                label={phone.label}
-                caption={phone.caption}
-                float={index === 1}
-                floatDelay={index * 0.9}
-              />
-            </motion.div>
-          ))}
+    <section aria-labelledby="app-preview-heading" className="relative overflow-hidden px-5 pb-24 lg:px-8">
+      <div className="relative mx-auto w-full max-w-7xl">
+        <SectionHeader
+          id="app-preview-heading"
+          eyebrow={t.features.eyebrow}
+          title={phones[1].label}
+          copy={phones[1].alt}
+        />
+        <div className="relative mx-auto mt-14 w-full max-w-6xl">
+          <div className="mb-6 flex justify-center sm:mb-2 sm:justify-end sm:pr-2 lg:pr-6">
+            <div className="w-fit max-w-full rounded-3xl border border-white/60 bg-white/80 px-5 py-4 text-left shadow-premium backdrop-blur-xl sm:w-60">
+              <div className="flex items-center gap-3">
+                <img src={markerArt} alt="VTZ terminal marker" className="h-12 w-12 shrink-0 rounded-2xl object-cover" />
+                <div className="min-w-0">
+                  <p className="text-xs font-black uppercase text-ink/45">{t.floating.city}</p>
+                  <p className="truncate font-black">{t.floating.guide}</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <ThreePhoneShowcase t={t} phones={phones} />
+          <p className="mt-12 text-center text-sm font-black uppercase tracking-[0.2em] text-ink/45">{t.heroPreviewEyebrow}</p>
         </div>
-        <p className="mt-10 text-center text-sm font-black uppercase tracking-[0.2em] text-ink/45">{t.heroPreviewEyebrow}</p>
-      </motion.div>
-    </div>
+      </div>
+    </section>
+  );
+}
+
+function ThreePhoneShowcase({ t, phones }) {
+  const positionClasses = ['vtz-showcase-tilt-left', 'vtz-showcase-tilt-center', 'vtz-showcase-tilt-right'];
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 32 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, amount: 0.2 }}
+      transition={{ duration: 0.7, ease: 'easeOut' }}
+      role="img"
+      aria-label="Preview of three VTZ mobile application screens: terminal map, report updates, and Help Desk"
+      style={{ perspective: '1400px' }}
+      className="grid grid-cols-1 items-center justify-items-center gap-10 sm:grid-cols-3 sm:items-end sm:gap-8 sm:[transform-style:preserve-3d] lg:gap-14"
+    >
+      {phones.map((phone, index) => (
+        <motion.div
+          key={phone.label}
+          initial={{ opacity: 0, y: 36 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.3 }}
+          transition={{ duration: 0.7, delay: index * 0.1, ease: 'easeOut' }}
+          className={`w-full max-w-[250px] sm:w-auto sm:max-w-none [transform-style:preserve-3d] ${index === 1 ? 'sm:-mt-10 lg:scale-[1.06]' : ''}`}
+        >
+          <div className={`group vtz-showcase-tilt ${positionClasses[index]}`}>
+            <DeviceFrame
+              image={phone.image}
+              alt={phone.alt}
+              hoverable
+              wide={index === 1}
+            />
+          </div>
+        </motion.div>
+      ))}
+    </motion.div>
   );
 }
 
@@ -683,28 +745,16 @@ function Footer({ t }) {
 }
 
 function DeviceFrame({
-  t,
   image = previewMap,
   alt = 'VTZ app preview',
-  label = null,
-  caption = 'Nearby terminals',
-  float = false,
-  floatDelay = 0,
+  hoverable = false,
+  wide = false,
 }) {
-  const live = label ?? t?.phoneLive ?? 'VTZ Live';
-  const reduceMotion = useReducedMotion();
-  const floatMotion = float && !reduceMotion
-    ? {
-        animate: { y: [0, -9, 0] },
-        transition: { duration: 6, repeat: Infinity, ease: 'easeInOut', delay: floatDelay },
-      }
-    : {};
   return (
-    <motion.div
-      {...floatMotion}
-      className="relative mx-auto w-full max-w-[230px]"
+    <div
+      className={`relative mx-auto w-full ${wide ? 'max-w-[250px] sm:max-w-[240px] lg:max-w-[260px]' : 'max-w-[230px]'}`}
     >
-      <div className="rounded-[2.2rem] bg-ink p-[10px] shadow-premium ring-1 ring-white/20">
+      <div className={`rounded-[2.2rem] bg-ink p-[10px] ring-1 ring-white/20 transition-shadow duration-500 ease-out ${hoverable ? 'shadow-premium group-hover:shadow-glow' : 'shadow-premium'}`}>
         <div className="relative overflow-hidden rounded-[1.7rem] bg-[#0b1620]">
           <div aria-hidden="true" className="absolute left-1/2 top-2.5 z-20 h-5 w-24 -translate-x-1/2 rounded-full bg-ink" />
           <img
@@ -715,49 +765,9 @@ function DeviceFrame({
             draggable={false}
           />
           <span aria-hidden="true" className="absolute inset-x-0 top-0 h-20 bg-gradient-to-b from-ink/55 to-transparent" />
-          <div className="absolute left-3 right-3 top-9 flex items-center justify-between rounded-2xl bg-white/95 px-3.5 py-2.5 shadow-premium backdrop-blur">
-            <div className="min-w-0">
-              <p className="truncate text-[10px] font-black uppercase tracking-[0.14em] text-ink/45">{live}</p>
-              <p className="truncate text-[13px] font-black text-ink">{caption}</p>
-            </div>
-            <span className="grid h-8 w-8 shrink-0 place-items-center rounded-full bg-ink text-aqua">
-              <Map size={15} aria-hidden="true" />
-            </span>
-          </div>
-          <div className="absolute inset-x-3 bottom-3 rounded-2xl bg-white/95 p-3.5 shadow-premium backdrop-blur">
-            <div className="flex items-center justify-between gap-2">
-              <p className="truncate text-[13px] font-black text-ink">{t?.phoneInfo ?? 'Terminal information'}</p>
-              <span className="inline-flex shrink-0 items-center gap-1.5 rounded-full bg-ink px-2.5 py-1 text-[10px] font-black uppercase tracking-wide text-aqua">
-                <span aria-hidden="true" className="h-1.5 w-1.5 rounded-full bg-aqua" /> {t?.mapCard?.guide ?? 'Guide'}
-              </span>
-            </div>
-            <div className="mt-2.5 h-1.5 overflow-hidden rounded-full bg-ink/10">
-              <span className="block h-full w-2/3 rounded-full bg-gradient-to-r from-aqua to-signal" />
-            </div>
-          </div>
         </div>
       </div>
-    </motion.div>
-  );
-}
-
-function FloatingTransportCard({ t }) {
-  const floating = (t && t.floating) || { city: 'Valenzuela City', guide: 'Tricycle terminal guide' };
-  const reduceMotion = useReducedMotion();
-  return (
-    <motion.div
-      animate={reduceMotion ? undefined : { y: [0, 12, 0] }}
-      transition={{ duration: 6, repeat: Infinity, ease: 'easeInOut' }}
-      className="absolute -right-2 top-7 z-10 hidden rounded-3xl border border-white/60 bg-white/80 p-4 shadow-premium backdrop-blur-xl sm:block"
-    >
-      <div className="flex items-center gap-3">
-        <img src={markerArt} alt="VTZ terminal marker" className="h-12 w-12 rounded-2xl object-cover" />
-        <div>
-          <p className="text-xs font-black uppercase text-ink/45">{floating.city}</p>
-          <p className="font-black">{floating.guide}</p>
-        </div>
-      </div>
-    </motion.div>
+    </div>
   );
 }
 

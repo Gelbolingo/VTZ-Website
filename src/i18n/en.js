@@ -4,7 +4,7 @@ export const en = {
   phoneInfo: 'Terminal information',
   nav: {
     home: 'Home', features: 'Features', how: 'How It Works',
-    about: 'About VTZ', download: 'Download', downloadBtn: 'Download',
+    about: 'About VTZ', download: 'Download', downloadBtn: 'Download App',
     getVtz: 'Get VTZ', menu: 'VTZ menu', openMenu: 'Open menu',
     closeMenu: 'Close menu', changeLanguage: 'Change language', homeAria: 'VTZ home',
   },

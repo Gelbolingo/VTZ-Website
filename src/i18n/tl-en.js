@@ -1,7 +1,7 @@
 export const tlen = {
   nav: {
     home: 'Home', features: 'Features', how: 'Paano Gumagana',
-    about: 'About VTZ', download: 'Download', downloadBtn: 'Download',
+    about: 'About VTZ', download: 'Download', downloadBtn: 'Download App',
     getVtz: 'Get VTZ', menu: 'VTZ menu', openMenu: 'Buksan ang menu',
     closeMenu: 'Isara ang menu', changeLanguage: 'Palitan ang language', homeAria: 'VTZ home',
   },

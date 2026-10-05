@@ -4,7 +4,7 @@ export const tl = {
   phoneInfo: 'Impormasyon ng terminal',
   nav: {
     home: 'Simula', features: 'Mga Tampok', how: 'Paano Ito Gumagana',
-    about: 'Tungkol sa VTZ', download: 'I-download', downloadBtn: 'I-download',
+    about: 'Tungkol sa VTZ', download: 'I-download', downloadBtn: 'Download App',
     getVtz: 'Kunin ang VTZ', menu: 'Menu ng VTZ', openMenu: 'Buksan ang menu',
     closeMenu: 'Isara ang menu', changeLanguage: 'Palitan ang wika', homeAria: 'Unang pahina ng VTZ',
   },
