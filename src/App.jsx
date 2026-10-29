@@ -29,10 +29,10 @@ import previewHelpdesk from '../Asset/preview/Helpdesk.png';
 import previewMap from '../Asset/preview/map.png';
 import previewNotifications from '../Asset/preview/notification.png';
 import previewValenzuela from '../Asset/preview/Valenzuela.jpg';
-import qrCodeImage from '../Asset/Qrcode/VTZv.1.5QrCode.png';
+import qrCodeImage from '../Asset/Qrcode/VTZv.1.6QrCode.png';
 import { LANGUAGE_META, LANGUAGE_VALUES, STRINGS, normalizeLanguage, persistLanguage, readSavedLanguage } from './i18n.js';
 
-const APK_URL = 'https://github.com/Gelbolingo/VTZ-Website/releases/download/1.5/VTZv.1.5.apk';
+const APK_URL = 'https://github.com/Gelbolingo/VTZ-Website/releases/download/1.6/VTZv.1.6.apk';
 
 const CORE_FEATURE_ICONS = [Search, MapPin, Landmark, PackageSearch, FileWarning, ReceiptText];
 const WHY_CARD_ICONS = [Compass, Info, ClipboardList];
