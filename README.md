@@ -41,7 +41,7 @@ VTZ is available as an Android application package (APK).
 
 Download the VTZ Android application:
 
-https://github.com/Gelbolingo/VTZ-Website/releases/download/1.4/VTZv.1.4.apk
+https://github.com/Gelbolingo/VTZ-Website/releases/download/1.8/VTZv.1.8.apk
 
 ## Website
 
@@ -64,7 +64,7 @@ Current preview assets used by the landing page live in `Asset/preview/`:
 - `Helpdesk.png` — Help Desk reporting screen (hero phone 3)
 - `Valenzuela.jpg` — Valenzuela City landmark used in the About section
 
-The download QR code used by the landing page is `Asset/Qrcode/VTZQRCode2.png`.
+The download QR code used by the landing page is `Asset/Qrcode/VTZv.1.8QrCode.png`.
 
 ## Scope
 
